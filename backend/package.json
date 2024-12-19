@@ -16,7 +16,7 @@
     "nodemon": "^2.0.19"
   },
   "devDependencies": {
-    "jest-sonar-reporter": "^2.0.0"
+    "jest-sonar-reporter": "^2.0.0",
      "mongodb-memory-server": "^7.0.0"
   }
 }
