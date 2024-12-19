@@ -1,24 +1,19 @@
-const mongoose = require('mongoose');
-const { MongoMemoryServer } = require('mongodb-memory-server');
+// src/server.js
+const express = require('express');
+const sumRoutes = require('./routes/sumRoutes');
+const app = express();
+const port = 3000;
 
-let mongoServer;
+// Use the sumRoutes for the "/sum" endpoint
+app.use('/sum', sumRoutes);
 
-beforeAll(async () => {
-  mongoServer = await MongoMemoryServer.create();
-  const mongoUri = mongoServer.getUri();
-  console.log('Mongo URI:', mongoUri); // Log URI for debugging
-  await mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
-  await mongoose.connection.once('open', () => {
-    console.log('MongoDB in-memory server is running');
-  });
+app.get('/', (req, res) => {
+  res.send('Hello, MERN!');
 });
 
-afterAll(async () => {
-  if (mongoose.connection.readyState === 1) {
-    await mongoose.connection.dropDatabase();
-  }
-  await mongoose.connection.close();
-  await mongoServer.stop();
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });
 
+module.exports = app; // Export app for testing purposes
 
