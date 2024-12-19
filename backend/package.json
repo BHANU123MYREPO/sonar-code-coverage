@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "jest-sonar-reporter": "^2.0.0"
+     "mongodb-memory-server": "^7.0.0"
   }
 }
 
