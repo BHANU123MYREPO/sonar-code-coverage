@@ -1,17 +1,17 @@
-const express = require('express');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-dotenv.config();
+const { MongoMemoryServer } = require('mongodb-memory-server');
 
-const app = express();
-app.use(express.json());
+let mongoServer;
 
-const userRoutes = require('./routes/userRoutes');
-app.use('/api/users', userRoutes);
+beforeAll(async () => {
+  mongoServer = await MongoMemoryServer.create();
+  const mongoUri = mongoServer.getUri();
+  await mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
+});
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("MongoDB connected"))
-  .catch(err => console.log(err));
-
-app.listen(5000, () => console.log('Server running on port 5000'));
+afterAll(async () => {
+  await mongoose.connection.dropDatabase();
+  await mongoose.connection.close();
+  await mongoServer.stop();
+});
 
