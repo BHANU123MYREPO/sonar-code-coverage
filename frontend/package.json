@@ -1,17 +1,54 @@
 {
+  "name": "my-react-app",
+  "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
-    "test": "vitest",
-    "test:coverage": "vitest --coverage"
+    "start": "vite",
+    "build": "vite build",
+    "test": "vitest --coverage",  // Enable code coverage for testing
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "axios": "^1.0.0"
   },
   "devDependencies": {
-    "vitest": "^0.30.0",
-    "@testing-library/react": "^13.0.0",
-    "@testing-library/jest-dom": "^5.0.0"
+    "@testing-library/react": "^14.0.0", 
+    "@testing-library/jest-dom": "^5.16.5",
+    "vitest": "^0.30.1", 
+    "jsdom": "^21.1.1", 
+    "vite": "^4.0.0", 
+    "vite-plugin-react": "^3.0.0",
+    "@vitest/coverage-c8": "^0.30.1"  // Coverage plugin
   },
   "vitest": {
-    "test": {
-      "globals": true,
-      "environment": "jsdom"
+    "globals": true,
+    "environment": "jsdom",
+    "setupFiles": "./src/setupTests.js",
+    "coverage": {
+      "provider": "c8",
+      "reporter": ["text", "html", "lcov"],
+      "all": true,
+      "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"]
     }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   }
 }
