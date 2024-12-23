@@ -5,7 +5,7 @@
   "scripts": {
     "start": "vite",
     "build": "vite build",
-    "test": "vitest --coverage",  // Enable code coverage for testing
+    "test": "vitest --coverage", 
     "eject": "react-scripts eject"
   },
   "dependencies": {
@@ -20,7 +20,7 @@
     "jsdom": "^21.1.1", 
     "vite": "^4.0.0", 
     "vite-plugin-react": "^3.0.0",
-    "@vitest/coverage-c8": "^0.30.1"  // Coverage plugin
+    "@vitest/coverage-c8": "^0.30.1"  
   },
   "vitest": {
     "globals": true,
